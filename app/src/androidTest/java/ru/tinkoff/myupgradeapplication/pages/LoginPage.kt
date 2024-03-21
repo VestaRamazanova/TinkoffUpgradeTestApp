@@ -7,10 +7,18 @@ import androidx.test.uiautomator.By
 
 class LoginPage : BasePage() {
 
-    val loginFieldSelector = By.res("ru.tinkoff.myupgradeapplication:id/edittext_login")
-    val passwordFieldSelector = By.res("ru.tinkoff.myupgradeapplication:id/edittext_password")
-    val submitButton = By.res("ru.tinkoff.myupgradeapplication:id/button_submit")
-    val previousButton = By.res("ru.tinkoff.myupgradeapplication:id/button_second")
+    companion object {
+        private const val LOGIN_FIELD_RES = "ru.tinkoff.myupgradeapplication:id/edittext_login"
+        private const val PASSWORD_FIELD_RES = "ru.tinkoff.myupgradeapplication:id/edittext_password"
+        private const val SUBMIT_BUTTON_RES = "ru.tinkoff.myupgradeapplication:id/button_submit"
+        private const val PREVIOUS_BUTTON_RES = "ru.tinkoff.myupgradeapplication:id/button_second"
+    }
+
+    val loginFieldSelector = By.res(LOGIN_FIELD_RES)
+    val passwordFieldSelector = By.res(PASSWORD_FIELD_RES)
+    val submitButton = By.res(SUBMIT_BUTTON_RES)
+    val previousButton = By.res(PREVIOUS_BUTTON_RES)
+
     fun enterLogin(loginValue: String) {
         device
             .wait(Until.findObject(loginFieldSelector), waitingTimeOut)
@@ -24,18 +32,15 @@ class LoginPage : BasePage() {
     }
 
     fun pressSubmitButton() {
-        device
-            .wait(Until.findObject(submitButton), waitingTimeOut)
-            .click()
+        clickElementBySelector(submitButton)
     }
+
     fun checkTextOnSnackBar(text: String) {
         assert(device.wait(Until.hasObject(By.text(text)), waitingTimeOut))
     }
 
     fun pressPreviousButton() {
-        device
-            .wait(Until.findObject(previousButton), waitingTimeOut)
-            .click()
+        clickElementBySelector(previousButton)
     }
 
     fun checkTextInLoginField(text: String) {

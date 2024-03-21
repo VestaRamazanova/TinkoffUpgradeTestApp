@@ -24,9 +24,7 @@ class UserFlowTest {
     fun emptyPasswordFieldTest() {
         val loginValue = "Tinkoff"
 
-        with(FirstPage()) {
-            pressNextButton()
-        }
+        FirstPage().pressNextButton()
 
         with(LoginPage()) {
             enterLogin(loginValue)
@@ -39,9 +37,7 @@ class UserFlowTest {
     fun emptyLoginFieldTest() {
         val passwordValue = "Upgrade"
 
-        with(FirstPage()) {
-            pressNextButton()
-        }
+        FirstPage().pressNextButton()
 
         with(LoginPage()) {
             enterPassword(passwordValue)
@@ -55,9 +51,7 @@ class UserFlowTest {
         val loginValue = ""
         val passwordValue = ""
 
-        with(FirstPage()) {
-            pressNextButton()
-        }
+        FirstPage().pressNextButton()
 
         with(LoginPage()) {
             enterLogin(loginValue)
@@ -99,12 +93,10 @@ class UserFlowTest {
             checkTextOnScreen(secondText)
             pressNextButton()
         }
-        with(LoginPage()) {
-            pressPreviousButton()
-        }
-        with(FirstPage()) {
-            checkTextOnScreen(firstText)
-        }
+
+        LoginPage().pressPreviousButton()
+
+        FirstPage().checkTextOnScreen(firstText)
     } //В текстовом поле отображается текст по умолчанию (тот, который показывался при открытии приложения).
 
     @Test
@@ -113,17 +105,15 @@ class UserFlowTest {
         val passwordValue = "Upgrade"
         val emptyField = ""
 
-        with(FirstPage()) {
-            pressNextButton()
-        }
+        FirstPage().pressNextButton()
+
         with(LoginPage()) {
             enterLogin(loginValue)
             enterPassword(passwordValue)
             pressPreviousButton()
         }
-        with(FirstPage()) {
-            pressNextButton()
-        }
+        FirstPage().pressNextButton()
+
         with(LoginPage()) {
             checkTextInLoginField(emptyField)
             checkTextInPasswordField(emptyField)
@@ -135,9 +125,7 @@ class UserFlowTest {
         val loginValue = "Tinkoff"
         val passwordValue = "Upgrade"
 
-        with(FirstPage()) {
-            pressNextButton()
-        }
+        FirstPage().pressNextButton()
 
         with(LoginPage()) {
             enterLogin(loginValue)

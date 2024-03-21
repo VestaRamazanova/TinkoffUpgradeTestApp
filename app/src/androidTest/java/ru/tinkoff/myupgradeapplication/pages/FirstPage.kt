@@ -6,14 +6,18 @@ import androidx.test.uiautomator.UiDevice
 
 class FirstPage : BasePage() {
 
-    val nextButtonSelector = By.text("Next")
-    val ChangeButtonSelector = By.text("Change")
-    val ShowDialogButtonSelector = By.res("ru.tinkoff.myupgradeapplication:id/dialog_button")
+    companion object {
+        private const val NEXT_BUTTON_TEXT = "Next"
+        private const val CHANGE_BUTTON_TEXT = "Change"
+        private const val SHOW_DIALOG_BUTTON_RES = "ru.tinkoff.myupgradeapplication:id/dialog_button"
+    }
+
+    val nextButtonSelector = By.text(NEXT_BUTTON_TEXT)
+    val changeButtonSelector = By.text(CHANGE_BUTTON_TEXT)
+    val showDialogButtonSelector = By.res(SHOW_DIALOG_BUTTON_RES)
 
     fun pressNextButton() {
-        device
-            .wait(Until.findObject(nextButtonSelector), waitingTimeOut)
-            .click()
+        clickElementBySelector(nextButtonSelector)
     }
 
     fun checkTextOnScreen(firstText: String) {
@@ -21,15 +25,11 @@ class FirstPage : BasePage() {
     }
 
     fun pressChangeButton() {
-        device
-           .wait(Until.findObject(ChangeButtonSelector), waitingTimeOut)
-           .click()
+        clickElementBySelector(changeButtonSelector)
     }
 
     fun pressShowDialogButton() {
-        device
-            .wait(Until.findObject(ShowDialogButtonSelector), waitingTimeOut)
-            .click()
+        clickElementBySelector(showDialogButtonSelector)
     }
 
     fun checkTitleOnDialogBox(text: String) {

@@ -15,7 +15,7 @@ import ru.tinkoff.myupgradeapplication.pages.LoginPage
 import ru.tinkoff.myupgradeapplication.MainActivity
 
 @RunWith(AndroidJUnit4::class)
-class UserFlowTest {
+class UIAutomator_UserFlowTest {
 
     @get:Rule
     val activityRule = ActivityScenarioRule(MainActivity::class.java)

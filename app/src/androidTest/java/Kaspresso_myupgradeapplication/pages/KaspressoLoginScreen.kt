@@ -14,7 +14,10 @@ import androidx.appcompat.widget.AppCompatTextView
 import com.google.android.material.appbar.MaterialToolbar
 import ru.tinkoff.myupgradeapplication.R
 
-class KaspressoLoginScreen : BaseScreen() {
+class KaspressoLoginScreen : KScreen<KaspressoLoginScreen>() {
+    override val layoutId: Int? = null
+    override val viewClass: Class<*>? = null
+
     val buttonPrevious = KButton { withId(R.id.button_second) }
     val buttonSubmit = KButton { withId(R.id.button_submit) }
     val loginField = KEditText { withId(R.id.edittext_login) }
@@ -23,10 +26,10 @@ class KaspressoLoginScreen : BaseScreen() {
     val editTextPassword = KEditText { withId(R.id.edittext_password) }
     val snackbar = KSnackbar()
 
-    val textOnSnackbar = KTextView {
-        isInstanceOf(MaterialTextView::class.java)
-        withParent { isInstanceOf(SnackbarContentLayout::class.java) }
-    }
+//   val textOnSnackbar = KTextView {
+//        isInstanceOf(MaterialTextView::class.java)
+//        withParent { isInstanceOf(SnackbarContentLayout::class.java) }
+//    }
 
     companion object {
         inline operator fun invoke(crossinline block: KaspressoLoginScreen.() -> Unit) =

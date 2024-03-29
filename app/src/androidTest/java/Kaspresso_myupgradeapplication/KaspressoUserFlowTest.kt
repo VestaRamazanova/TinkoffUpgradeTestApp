@@ -1,8 +1,6 @@
 package Kaspresso_myupgradeapplication
 
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
-import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
-import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import org.junit.Rule
 import org.junit.Test
@@ -34,17 +32,13 @@ val kaspressoBuilder = Kaspresso.Builder.simple(
     stepWatcherInterceptors.addAll(listOf(AllureMapperStepInterceptor()))
 }
 
-class Kaspresso_UserFlowTest : TestCase(kaspressoBuilder) {
+class KaspressoUserFlowTest : TestCase(kaspressoBuilder) {
 
     @get:Rule
     val activityRule = ActivityScenarioRule(MainActivity::class.java)
 
-    val loginValue = "Tinkoff"
-    val passwordValue = "Upgrade"
-    val emptyField = ""
-
     @Test
-    fun PasswordEmptyTest() {
+    fun passwordEmptyTest() {
         run {
 
             KaspressoFirstScreen {
@@ -60,7 +54,7 @@ class Kaspresso_UserFlowTest : TestCase(kaspressoBuilder) {
     } //Выводится сообщение “Password field must be filled!”
 
     @Test
-    fun LoginEmptyTest() {
+    fun loginEmptyTest() {
         run {
 
             KaspressoFirstScreen {
@@ -76,7 +70,7 @@ class Kaspresso_UserFlowTest : TestCase(kaspressoBuilder) {
     } //Выводится сообщение “Login field must be filled!”
 
     @Test
-    fun LoginPasswordEmptyTest() {
+    fun loginPasswordEmptyTest() {
         run {
 
             KaspressoFirstScreen {
@@ -95,8 +89,9 @@ class Kaspresso_UserFlowTest : TestCase(kaspressoBuilder) {
 
         KaspressoFirstScreen {
             showDialogButton.click()
-            titleOnDialog.hasText("Важное сообщение")
-            textOnDialog.hasText("Теперь ты автоматизатор")
+            dialog.title.hasText("Важное сообщение")
+            dialog.message.hasText("Теперь ты автоматизатор")
+
         }
     } //Выводится диалоговое окно с заголовком “Важное сообщение” и текстом “Теперь ты автоматизатор”.
 
@@ -111,20 +106,16 @@ class Kaspresso_UserFlowTest : TestCase(kaspressoBuilder) {
     } //Диалоговое окно больше не отображается на экране ( = можем нажать на кнопку Next)
 
     @Test
-    fun ReturnTextTest() {
-        // Получение контекста приложения и строк из ресурсов (можно было использовать и через InstrumentationRegistry)
-        val firstText = ApplicationProvider.getApplicationContext<Context>().getString(R.string.first_text)
-        val secondText = ApplicationProvider.getApplicationContext<Context>().getString(R.string.second_text)
-
+    fun returnTextTest() {
         KaspressoFirstScreen {
-            textOnScreen.hasText(firstText)
+            textOnScreen.hasText(R.string.first_text)
             changeButton.click()
-            textOnScreen.hasText(secondText)
+            textOnScreen.hasText(R.string.second_text)
             nextButton.click()
         }
 
         KaspressoLoginScreen().buttonPrevious.click()
-        KaspressoFirstScreen().textOnScreen.hasText(firstText)
+        KaspressoFirstScreen().textOnScreen.hasText(R.string.first_text)
     } //В текстовом поле отображается текст по умолчанию (тот, который показывался при открытии приложения).
 
     @Test
@@ -190,5 +181,11 @@ class Kaspresso_UserFlowTest : TestCase(kaspressoBuilder) {
                 }
             }
         }
+    }
+
+    private companion object {
+        const val loginValue = "Tinkoff"
+        const val passwordValue = "Upgrade"
+        const val emptyField = ""
     }
 }
